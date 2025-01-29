@@ -9,22 +9,29 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
+  provider  = "postgres"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
-model students{
-  // id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  email     String  @unique
-  password  String
-  GkvRegistrationNo Int?
-  phone     String  
-  isGurukulStudent Boolean 
+model User {
+  // id                  String  @id @default(uuid()) // Use UUID instead of ObjectId
+  // name                String
+  // email               String  @unique
+  // password            String
+  // GkvRegistrationNo   Int?
+  // phone               String  
+  // isGurukulStudent    Boolean 
+  // createdAt           DateTime @default(now())
+  // isPaid              Boolean @default(false)
+  // transactionId       String @unique @default("")
+  // paymentImageUrl     String @default("")
+  // entry               Boolean @default(false)
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  username String @unique
+  name     String
+  password String
   createdAt DateTime @default(now())
-  isPaid Boolean @default(false)
-  transactionId String @unique @default("")
-  paymentImageUrl String @default("")
-  entry Boolean @default(false)
+  updatedAt DateTime @updatedAt
 }
